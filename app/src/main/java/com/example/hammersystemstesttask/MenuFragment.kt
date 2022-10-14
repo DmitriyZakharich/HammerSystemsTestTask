@@ -2,10 +2,10 @@ package com.example.hammersystemstesttask
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -36,34 +36,32 @@ class MenuFragment : Fragment() {
         viewPagerSetup()
         recyclerViewMenu()
 
+//        val adapter = ArrayAdapter.createFromResource(activity as AppCompatActivity, R.array.cities, R.layout.cities_spinner_item)
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
+        val adapter2 = ArrayAdapter(activity as AppCompatActivity, R.layout.spinner_item, R.id.text1, resources.getStringArray(R.array.cities))
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        binding.citySpinner.adapter = adapter2
 
     }
 
     private fun recyclerViewMenu() {
-        val rvAdapter = RecyclerViewMenuAdapter(
-            listOf(
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "123", "composition1", "123"),
-                MenuItem(null, "456", "composition2", "456"),
-                MenuItem(null, "678", "composition3", "789")
-            ))
+        val rvAdapter = RecyclerViewMenuAdapter(listOf(MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "123", "composition1", "123"),
+            MenuItem(null, "456", "composition2", "456"),
+            MenuItem(null, "678", "composition3", "789")))
         binding.recyclerviewMenu.adapter = rvAdapter
     }
 
     private fun viewPagerSetup() {
-        val adapter = ViewPagerPromoAdapter(
-            listOf(
-                Promo("123"),
-                Promo("456"),
-                Promo("789")))
+        val adapter = ViewPagerPromoAdapter(listOf(Promo("123"), Promo("456"), Promo("789")))
 
         with(binding.viewpagerPromo) {
             clipToPadding = false
