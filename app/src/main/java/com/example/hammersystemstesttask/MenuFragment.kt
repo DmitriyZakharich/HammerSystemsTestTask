@@ -36,8 +36,6 @@ class MenuFragment : Fragment() {
         viewPagerSetup()
         recyclerViewMenu()
 
-//        val adapter = ArrayAdapter.createFromResource(activity as AppCompatActivity, R.array.cities, R.layout.cities_spinner_item)
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val adapter2 = ArrayAdapter(activity as AppCompatActivity, R.layout.spinner_item, R.id.text1, resources.getStringArray(R.array.cities))
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
@@ -61,7 +59,11 @@ class MenuFragment : Fragment() {
     }
 
     private fun viewPagerSetup() {
-        val adapter = ViewPagerPromoAdapter(listOf(Promo("123"), Promo("456"), Promo("789")))
+        val adapter = ViewPagerPromoAdapter(
+            listOf(R.drawable.banner1,
+                R.drawable.banner2,
+                R.drawable.banner3,
+                R.drawable.banner4))
 
         with(binding.viewpagerPromo) {
             clipToPadding = false

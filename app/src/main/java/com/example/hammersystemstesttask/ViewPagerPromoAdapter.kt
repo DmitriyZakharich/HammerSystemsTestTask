@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 
 
-class ViewPagerPromoAdapter(private val promos: List<Promo>) :
+class ViewPagerPromoAdapter(private val promos: List<Int>) :
     RecyclerView.Adapter<ViewPagerPromoAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val largeTextView: TextView = itemView.findViewById(R.id.person_name)
+        val image: ShapeableImageView = itemView.findViewById(R.id.image_banner)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -21,7 +22,7 @@ class ViewPagerPromoAdapter(private val promos: List<Promo>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.largeTextView.text = promos[position].string
+        holder.image.setBackgroundResource(promos[position])
     }
 
     override fun getItemCount() = promos.size
