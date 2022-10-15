@@ -15,7 +15,7 @@ class GetAdapterUseCase(private val repository: Repository) {
 
     init {
         Log.d(TAG, "GetAdapterUseCase: init")
-        repository.meals.observeForever(observer())
+//        repository.meals.observeForever(observer())
     }
 
     private fun observer() = Observer<List<MealRepos>> { data ->
@@ -28,6 +28,6 @@ class GetAdapterUseCase(private val repository: Repository) {
     fun start() {
         Log.d(TAG, "GetAdapterUseCase: start")
 
-        repository.loadData()
+        repository.startLoad()
     }
 }
