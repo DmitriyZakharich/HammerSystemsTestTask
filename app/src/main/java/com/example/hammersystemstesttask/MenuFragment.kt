@@ -10,16 +10,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.example.hammersystemstesttask.databinding.FragmentMenuBinding
+import com.example.hammersystemstesttask.domain.RecyclerMenuAdapter
+import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModel
+import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModelFactory
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import javax.inject.Inject
 
 
 class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var vmFactory: MenuFragmentViewModelFactory
+    private lateinit var viewModel: MenuFragmentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View {
@@ -35,27 +44,40 @@ class MenuFragment : Fragment() {
 
         viewPagerSetup()
         recyclerViewMenu()
+        configuringSpinnerAdapter()
+        configuringViewModel()
+    }
+
+    private fun configuringViewModel() {
+        (requireContext().applicationContext as MyApp).appComponent.inject(this)
+        viewModel = ViewModelProvider(this, vmFactory)[MenuFragmentViewModel::class.java]
+
+        (viewModel as MenuFragmentViewModel).adapter.observe(viewLifecycleOwner) {
+            binding.recyclerviewMenu.adapter = it
+        }
+        viewModel.getAdapter()
+    }
 
 
+    private fun configuringSpinnerAdapter() {
         val adapter2 = ArrayAdapter(activity as AppCompatActivity, R.layout.spinner_item, R.id.text1, resources.getStringArray(R.array.cities))
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
         binding.citySpinner.adapter = adapter2
-
     }
 
     private fun recyclerViewMenu() {
-        val rvAdapter = RecyclerViewMenuAdapter(listOf(MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "123", "composition1", "123"),
-            MenuItem(null, "456", "composition2", "456"),
-            MenuItem(null, "678", "composition3", "789")))
-        binding.recyclerviewMenu.adapter = rvAdapter
+//        val rvAdapter = RecyclerMenuAdapter(listOf(MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "123", "composition1", "123"),
+//            MenuItem(null, "456", "composition2", "456"),
+//            MenuItem(null, "678", "composition3", "789")))
+//        binding.recyclerviewMenu.adapter = rvAdapter
     }
 
     private fun viewPagerSetup() {
