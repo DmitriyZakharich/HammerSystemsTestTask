@@ -23,8 +23,9 @@
     <color name="composition">#AAAAAD</color>
     <color name="category_button_background">#F3CCD6</color>
     <color name="category_button_background_passive">#FFFFFF</color>
-    <color name="category_button_text_active">#FD3A69</color>
+    <color name="button_active">#FD3A69</color>
     <color name="category_button_text_passive">#C3C4C9</color>
     <color name="bottom_menu">#F0F0F0</color>
+    <color name="item_color_inactive">#263238</color>
 
 </resources>

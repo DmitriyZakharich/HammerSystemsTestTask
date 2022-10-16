@@ -96,7 +96,7 @@
                 app:cornerRadius="6dp"
                 android:layout_marginStart="16dp"
                 android:text="@string/pizza"
-                android:textColor="@color/category_button_text_active"
+                android:textColor="@color/button_active"
                 app:backgroundTint="@color/category_button_background"/>
 
             <com.google.android.material.button.MaterialButton
