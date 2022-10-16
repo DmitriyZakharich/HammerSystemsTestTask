@@ -6,4 +6,7 @@
     <string name="pizza">Пицца</string>
     <string name="combo">Комбо</string>
     <string name="desert">Десерты</string>
+    <string name="basket">Корзина</string>
+    <string name="profile">Профиль</string>
+    <string name="menu">Меню</string>
 </resources>

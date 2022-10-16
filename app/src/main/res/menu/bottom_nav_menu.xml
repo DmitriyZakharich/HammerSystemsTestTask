@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuFragment"
+        android:title="@string/menu"
+        android:icon="@drawable/ic_icon"
+        android:menuCategory="secondary"
+        android:tag="adviceFragment"/>
+
+    <item
+        android:id="@+id/profileFragment"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_union"
+        android:menuCategory="secondary"
+        android:tag="statisticFragment"/>
+
+    <item
+        android:id="@+id/basketFragment"
+        android:title="@string/basket"
+        android:icon="@drawable/ic_basket"
+        android:menuCategory="secondary"
+        android:tag="settingsFragment"/>
+</menu>
