@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.hammersystemstesttask.MenuFragment"
+        android:name="com.example.hammersystemstesttask.menu_screen.MenuFragment"
         android:label="MenuFragment"
         tools:layout="@layout/fragment_menu"/>
     <fragment

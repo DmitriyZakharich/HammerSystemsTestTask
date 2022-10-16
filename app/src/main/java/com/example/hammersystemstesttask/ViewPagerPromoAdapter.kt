@@ -3,12 +3,11 @@ package com.example.hammersystemstesttask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 
 
-class ViewPagerPromoAdapter(private val promos: List<Int>) :
+class ViewPagerPromoAdapter(private val banners: List<Int>) :
     RecyclerView.Adapter<ViewPagerPromoAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,8 +21,8 @@ class ViewPagerPromoAdapter(private val promos: List<Int>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.image.setBackgroundResource(promos[position])
+        holder.image.setBackgroundResource(banners[position])
     }
 
-    override fun getItemCount() = promos.size
+    override fun getItemCount() = banners.size
 }

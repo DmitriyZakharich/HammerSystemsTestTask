@@ -1,4 +1,4 @@
-package com.example.hammersystemstesttask
+package com.example.hammersystemstesttask.menu_screen
 
 
 import android.os.Bundle
@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
+import com.example.hammersystemstesttask.MyApp
+import com.example.hammersystemstesttask.R
+import com.example.hammersystemstesttask.ViewPagerPromoAdapter
 import com.example.hammersystemstesttask.databinding.FragmentMenuBinding
-import com.example.hammersystemstesttask.domain.RecyclerMenuAdapter
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModel
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModelFactory
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import javax.inject.Inject
-
 
 class MenuFragment : Fragment() {
 
@@ -40,53 +40,35 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val toolbar = view.findViewById(R.id.toolbar) as Toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        val collToolbar = view.findViewById(R.id.toolbar_layout) as CollapsingToolbarLayout
 
-        viewPagerSetup()
-        recyclerViewMenu()
-        configuringSpinnerAdapter()
         configuringViewModel()
+        startRecyclerMenuViewModels()
+        startViewPagerPromoViewModels()
+
+        configuringSpinnerAdapter()
     }
 
     private fun configuringViewModel() {
         (requireContext().applicationContext as MyApp).appComponent.inject(this)
         viewModel = ViewModelProvider(this, vmFactory)[MenuFragmentViewModel::class.java]
+    }
 
-        (viewModel as MenuFragmentViewModel).adapter.observe(viewLifecycleOwner) {
+    private fun startRecyclerMenuViewModels() {
+        viewModel.recyclerMenuAdapter.observe(viewLifecycleOwner) {
             binding.recyclerviewMenu.adapter = it
         }
-        viewModel.getAdapter()
+        viewModel.getRecyclerMenuAdapter()
     }
 
 
-    private fun configuringSpinnerAdapter() {
-        val adapter2 = ArrayAdapter(activity as AppCompatActivity, R.layout.spinner_item, R.id.text1, resources.getStringArray(R.array.cities))
-        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        binding.citySpinner.adapter = adapter2
+    private fun startViewPagerPromoViewModels() {
+        viewModel.viewPagerPromoAdapter.observe(viewLifecycleOwner) {
+            viewPagerSetup(it)
+        }
+        viewModel.getViewPagerPromoAdapter()
     }
 
-    private fun recyclerViewMenu() {
-//        val rvAdapter = RecyclerMenuAdapter(listOf(MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "123", "composition1", "123"),
-//            MenuItem(null, "456", "composition2", "456"),
-//            MenuItem(null, "678", "composition3", "789")))
-//        binding.recyclerviewMenu.adapter = rvAdapter
-    }
-
-    private fun viewPagerSetup() {
-        val adapter = ViewPagerPromoAdapter(
-            listOf(R.drawable.banner1,
-                R.drawable.banner2,
-                R.drawable.banner3,
-                R.drawable.banner4))
-
+    private fun viewPagerSetup(adapter: ViewPagerPromoAdapter) {
         with(binding.viewpagerPromo) {
             clipToPadding = false
             clipChildren = false
@@ -108,10 +90,15 @@ class MenuFragment : Fragment() {
                 page.translationY = offset
             }
         }
-
         binding.viewpagerPromo.adapter = adapter
     }
 
+    private fun configuringSpinnerAdapter() {
+        val adapter2 = ArrayAdapter(activity as AppCompatActivity, R.layout.spinner_item,
+            R.id.text1, resources.getStringArray(R.array.cities))
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        binding.citySpinner.adapter = adapter2
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
