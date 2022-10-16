@@ -1,12 +1,10 @@
 package com.example.hammersystemstesttask.domain
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.hammersystemstesttask.repository.MealRepos
+import com.example.hammersystemstesttask.repository.MealsRepos
 import com.example.hammersystemstesttask.repository.Repository
-import com.example.hammersystemstesttask.viewmodel.TAG
 
 class GetAdapterUseCase(private val repository: Repository) {
 
@@ -14,20 +12,15 @@ class GetAdapterUseCase(private val repository: Repository) {
     var adapter: LiveData<RecyclerMenuAdapter> = _adapter
 
     init {
-        Log.d(TAG, "GetAdapterUseCase: init")
-//        repository.meals.observeForever(observer())
+        repository.meals.observeForever(observer())
     }
 
-    private fun observer() = Observer<List<MealRepos>> { data ->
-        Log.d(TAG, "GetAdapterUseCase: observer")
-
-        val mealsList = mapperReposModelToDomainModel(data)
+    private fun observer() = Observer<MealsRepos> { data ->
+        val mealsList = mapperReposModelToDomainModel(data.meals)
         _adapter.value = RecyclerMenuAdapter(mealsList)
     }
 
     fun start() {
-        Log.d(TAG, "GetAdapterUseCase: start")
-
-        repository.startLoad()
+        repository.loadMeals()
     }
 }

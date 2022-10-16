@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Hammer Systems Test Task</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price">от 345 р</string>
+    <string name="composition">Состав: -</string>
+
 
     <string name="content">With the idea of imparting programming
       knowledge, Mr. Sandeep Jain, an IIT Roorkee alumnus started a
