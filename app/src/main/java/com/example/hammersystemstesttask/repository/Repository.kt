@@ -21,7 +21,32 @@ class Repository {
     val characters: LiveData<List<CharacterItem>> = _characters
 
     fun startLoad() {
-        loadEpisodeData()
+//        loadEpisodeData()
+        loadMeals()
+    }
+
+    private fun loadMeals() {
+        Log.d(TAG, "loadMeals: ")
+
+        val retrofit2 = Retrofit.Builder().baseUrl("https://www.themealdb.com/api/json/v1/1/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        val requestApiGithubRepos = retrofit2.create(RequestApiData::class.java)
+
+        val call = requestApiGithubRepos.getRequest("Seafood")
+
+        call.enqueue(object : Callback<NewMeals> {
+            override fun onFailure(call: Call<NewMeals>, t: Throwable) {
+                Log.d(TAG, "Repository: onFailure")
+            }
+
+            override fun onResponse(call: Call<NewMeals>, response: Response<NewMeals>) {
+                Log.d(TAG, "isSuccessful ${response.isSuccessful}")
+                Log.d(TAG, "response.body() ${response.body()}")
+                Log.d(TAG, "onResponse: ${response.body()?.meals?.joinToString()}")
+
+
+            }
+        })
     }
 
     private fun loadEpisodeData() {

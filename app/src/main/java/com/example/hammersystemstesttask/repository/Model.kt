@@ -1,9 +1,30 @@
 package com.example.hammersystemstesttask.repository
 
+data class NewMeals(
+    val meals: List<Meal>
+)
+
+data class Meal(
+    val idMeal: String,
+    val strMeal: String,
+    val strMealThumb: String
+)
+
 data class MealRepos(
     val idMeal: String,
     val strMeal: String,
     val strMealThumb: String
+)
+
+data class Categories(
+    val categories: List<Category>
+)
+
+data class Category(
+    val idCategory: String,
+    val strCategory: String,
+    val strCategoryDescription: String,
+    val strCategoryThumb: String
 )
 
 data class Episode(
