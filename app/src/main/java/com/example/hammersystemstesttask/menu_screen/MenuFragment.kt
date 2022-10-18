@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -15,8 +16,8 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.example.hammersystemstesttask.MyApp
 import com.example.hammersystemstesttask.R
-import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
 import com.example.hammersystemstesttask.databinding.FragmentMenuBinding
+import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModel
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModelFactory
 import javax.inject.Inject
@@ -46,8 +47,6 @@ class MenuFragment : Fragment() {
         startRecycleCategoriesViewModels()
         startViewPagerPromoViewModels()
         configuringSpinnerAdapter()
-
-        binding.recyclerviewCategories.setOnClickListener {}
     }
 
     private fun configuringViewModel() {
@@ -66,7 +65,7 @@ class MenuFragment : Fragment() {
         viewModel.recyclerCategoriesAdapter.observe(viewLifecycleOwner) {
             binding.recyclerviewCategories.adapter = it
         }
-        viewModel.getRecyclerCategoriesAdapter()
+        viewModel.getRecyclerCategoriesAdapter { string -> onItemClick(string) }
     }
 
 
@@ -109,9 +108,9 @@ class MenuFragment : Fragment() {
         binding.citySpinner.adapter = adapter2
     }
 
-//    private fun onItemClick(position: Int) {
-//        Toast.makeText(this, data[position], Toast.LENGTH_SHORT).show()
-//    }
+    private fun onItemClick(categoryRequest: String) {
+        viewModel.getRecyclerMenuAdapter(categoryRequest)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -123,3 +122,5 @@ class MenuFragment : Fragment() {
         fun newInstance() = MenuFragment()
     }
 }
+
+

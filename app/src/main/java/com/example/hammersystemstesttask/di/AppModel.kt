@@ -1,9 +1,10 @@
 package com.example.hammersystemstesttask.di
 
+import com.example.hammersystemstesttask.domain.Repository
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerCategoriesAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerMenuAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetViewPagerPromosAdapterUseCase
-import com.example.hammersystemstesttask.repository.Repository
+import com.example.hammersystemstesttask.repository.RepositoryImpl
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,5 @@ class AppModel {
         GetViewPagerPromosAdapterUseCase()
 
     @Provides
-    fun provideNetworkRepository(): Repository = Repository()
+    fun provideNetworkRepository(): Repository = RepositoryImpl()
 }

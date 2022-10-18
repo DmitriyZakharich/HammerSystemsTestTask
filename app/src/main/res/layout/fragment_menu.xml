@@ -98,41 +98,6 @@
                 android:orientation="horizontal"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/Widget.MaterialComponents.Button"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_weight="1"-->
-<!--                app:cornerRadius="6dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:text="@string/pizza"-->
-<!--                android:textColor="@color/button_active"-->
-<!--                app:backgroundTint="@color/category_button_background"/>-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/ShapeAppearanceOverlay.Material3.Button"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="@string/combo"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                app:cornerRadius="6dp"-->
-<!--                android:textColor="@color/category_button_text_passive"-->
-<!--                app:backgroundTint="@color/category_button_background_passive" />-->
-
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                style="@style/ShapeAppearanceOverlay.Material3.Button"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                app:cornerRadius="6dp"-->
-<!--                android:text="@string/desert"-->
-<!--                android:textColor="@color/category_button_text_passive"-->
-<!--                app:backgroundTint="@color/category_button_background_passive"-->
-<!--                app:elevation="10dp"/>-->
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.google.android.material.appbar.AppBarLayout>

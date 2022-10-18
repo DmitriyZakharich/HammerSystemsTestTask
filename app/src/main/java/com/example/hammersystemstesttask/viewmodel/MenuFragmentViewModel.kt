@@ -9,6 +9,7 @@ import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerCategoriesAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerMenuAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetViewPagerPromosAdapterUseCase
+import kotlin.reflect.KFunction1
 
 class MenuFragmentViewModel(
         private val getRecyclerMenuAdapterUseCase: GetRecyclerMenuAdapterUseCase,
@@ -25,19 +26,20 @@ class MenuFragmentViewModel(
     private var _recyclerCategoriesAdapter = MutableLiveData<RecyclerCategoriesAdapter>()
     val recyclerCategoriesAdapter: LiveData<RecyclerCategoriesAdapter> = _recyclerCategoriesAdapter
 
-    fun getRecyclerMenuAdapter() {
+    fun getRecyclerMenuAdapter(categoryRequest: String = "Beef") {
         getRecyclerMenuAdapterUseCase.adapter.observeForever {
             _recyclerMenuAdapter.value = it
         }
-        getRecyclerMenuAdapterUseCase.start()
+        getRecyclerMenuAdapterUseCase.start(categoryRequest)
     }
 
     fun getViewPagerPromoAdapter() {
         _viewPagerPromoAdapter.value = getViewPagerPromosAdapterUseCase.getAdapter()
     }
 
-    fun getRecyclerCategoriesAdapter() {
-        getRecyclerCategoriesAdapterUseCase.adapter.observeForever {
+    fun getRecyclerCategoriesAdapter(onItemClick: (string: String) -> Unit) {
+
+        getRecyclerCategoriesAdapterUseCase.getAdapterLD ( onItemClick ).observeForever{
             _recyclerCategoriesAdapter.value = it
         }
         getRecyclerCategoriesAdapterUseCase.start()

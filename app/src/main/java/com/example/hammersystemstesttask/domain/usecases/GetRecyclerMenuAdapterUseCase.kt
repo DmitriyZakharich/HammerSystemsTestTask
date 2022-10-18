@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.hammersystemstesttask.domain.RecyclerMenuAdapter
+import com.example.hammersystemstesttask.domain.Repository
 import com.example.hammersystemstesttask.domain.mapperMealsReposToMealsDomain
 import com.example.hammersystemstesttask.repository.MealsRepos
-import com.example.hammersystemstesttask.repository.Repository
 
 class GetRecyclerMenuAdapterUseCase(private val repository: Repository) {
 
@@ -22,7 +22,7 @@ class GetRecyclerMenuAdapterUseCase(private val repository: Repository) {
         _adapter.value = RecyclerMenuAdapter(mealsList)
     }
 
-    fun start() {
-        repository.loadMeals()
+    fun start(categoryRequest: String) {
+        repository.loadMeals(categoryRequest)
     }
 }
