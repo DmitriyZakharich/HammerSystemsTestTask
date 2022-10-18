@@ -10,11 +10,11 @@ data class MealRepos(
     val strMealThumb: String
 )
 
-data class Categories(
-    val categories: List<Category>
+data class CategoriesRepos(
+    val categories: List<CategoryRepos>
 )
 
-data class Category(
+data class CategoryRepos(
     val idCategory: String,
     val strCategory: String,
     val strCategoryDescription: String,

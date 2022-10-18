@@ -3,14 +3,17 @@ package com.example.hammersystemstesttask.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.hammersystemstesttask.ViewPagerPromoAdapter
+import com.example.hammersystemstesttask.domain.RecyclerCategoriesAdapter
 import com.example.hammersystemstesttask.domain.RecyclerMenuAdapter
+import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
+import com.example.hammersystemstesttask.domain.usecases.GetRecyclerCategoriesAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerMenuAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetViewPagerPromosAdapterUseCase
 
 class MenuFragmentViewModel(
         private val getRecyclerMenuAdapterUseCase: GetRecyclerMenuAdapterUseCase,
-        private val getViewPagerPromosAdapterUseCase: GetViewPagerPromosAdapterUseCase) :
+        private val getViewPagerPromosAdapterUseCase: GetViewPagerPromosAdapterUseCase,
+        private val getRecyclerCategoriesAdapterUseCase: GetRecyclerCategoriesAdapterUseCase) :
     ViewModel() {
 
     private var _recyclerMenuAdapter = MutableLiveData<RecyclerMenuAdapter>()
@@ -18,6 +21,9 @@ class MenuFragmentViewModel(
 
     private var _viewPagerPromoAdapter = MutableLiveData<ViewPagerPromoAdapter>()
     val viewPagerPromoAdapter: LiveData<ViewPagerPromoAdapter> = _viewPagerPromoAdapter
+
+    private var _recyclerCategoriesAdapter = MutableLiveData<RecyclerCategoriesAdapter>()
+    val recyclerCategoriesAdapter: LiveData<RecyclerCategoriesAdapter> = _recyclerCategoriesAdapter
 
     fun getRecyclerMenuAdapter() {
         getRecyclerMenuAdapterUseCase.adapter.observeForever {
@@ -28,5 +34,12 @@ class MenuFragmentViewModel(
 
     fun getViewPagerPromoAdapter() {
         _viewPagerPromoAdapter.value = getViewPagerPromosAdapterUseCase.getAdapter()
+    }
+
+    fun getRecyclerCategoriesAdapter() {
+        getRecyclerCategoriesAdapterUseCase.adapter.observeForever {
+            _recyclerCategoriesAdapter.value = it
+        }
+        getRecyclerCategoriesAdapterUseCase.start()
     }
 }

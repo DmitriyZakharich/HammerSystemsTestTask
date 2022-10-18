@@ -1,9 +1,10 @@
-package com.example.hammersystemstesttask
+package com.example.hammersystemstesttask.domain
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hammersystemstesttask.R
 import com.google.android.material.imageview.ShapeableImageView
 
 

@@ -1,7 +1,7 @@
 package com.example.hammersystemstesttask.domain.usecases
 
 import com.example.hammersystemstesttask.R
-import com.example.hammersystemstesttask.ViewPagerPromoAdapter
+import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
 
 class GetViewPagerPromosAdapterUseCase {
 

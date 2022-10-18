@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/category_button"
+    style="@style/Widget.MaterialComponents.Button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:text="@string/pizza"
+    android:textSize="16sp"
+    android:textAllCaps="false"
+    android:textColor="@color/button_active"
+    app:backgroundTint="@color/category_button_background"
+    app:cornerRadius="6dp" />

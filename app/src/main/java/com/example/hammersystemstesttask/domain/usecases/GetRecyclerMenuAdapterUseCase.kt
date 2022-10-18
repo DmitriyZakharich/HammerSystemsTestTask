@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.hammersystemstesttask.domain.RecyclerMenuAdapter
-import com.example.hammersystemstesttask.domain.mapperReposModelToDomainModel
+import com.example.hammersystemstesttask.domain.mapperMealsReposToMealsDomain
 import com.example.hammersystemstesttask.repository.MealsRepos
 import com.example.hammersystemstesttask.repository.Repository
 
@@ -18,7 +18,7 @@ class GetRecyclerMenuAdapterUseCase(private val repository: Repository) {
     }
 
     private fun observer() = Observer<MealsRepos> { data ->
-        val mealsList = mapperReposModelToDomainModel(data.meals)
+        val mealsList = mapperMealsReposToMealsDomain(data.meals)
         _adapter.value = RecyclerMenuAdapter(mealsList)
     }
 

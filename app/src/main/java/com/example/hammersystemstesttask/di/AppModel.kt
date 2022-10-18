@@ -1,5 +1,6 @@
 package com.example.hammersystemstesttask.di
 
+import com.example.hammersystemstesttask.domain.usecases.GetRecyclerCategoriesAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetRecyclerMenuAdapterUseCase
 import com.example.hammersystemstesttask.domain.usecases.GetViewPagerPromosAdapterUseCase
 import com.example.hammersystemstesttask.repository.Repository
@@ -13,12 +14,17 @@ class AppModel {
     @Provides
     fun provideMenuFragmentViewModelFactory(
             getRecyclerMenuAdapterUseCase: GetRecyclerMenuAdapterUseCase,
-            getViewPagerPromosAdapterUseCase: GetViewPagerPromosAdapterUseCase): MenuFragmentViewModelFactory =
-        MenuFragmentViewModelFactory(getRecyclerMenuAdapterUseCase, getViewPagerPromosAdapterUseCase)
+            getViewPagerPromosAdapterUseCase: GetViewPagerPromosAdapterUseCase,
+    getRecyclerCategoriesAdapterUseCase: GetRecyclerCategoriesAdapterUseCase): MenuFragmentViewModelFactory =
+        MenuFragmentViewModelFactory(getRecyclerMenuAdapterUseCase, getViewPagerPromosAdapterUseCase, getRecyclerCategoriesAdapterUseCase)
 
     @Provides
     fun provideGetRecyclerMenuAdapterUseCase(repository: Repository): GetRecyclerMenuAdapterUseCase =
         GetRecyclerMenuAdapterUseCase(repository)
+
+    @Provides
+    fun provideGetRecyclerCategoriesAdapterUseCase(repository: Repository): GetRecyclerCategoriesAdapterUseCase =
+        GetRecyclerCategoriesAdapterUseCase(repository)
 
     @Provides
     fun provideGetViewPagerPromosAdapterUseCase(): GetViewPagerPromosAdapterUseCase =

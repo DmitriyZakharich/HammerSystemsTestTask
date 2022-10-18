@@ -17,14 +17,29 @@ class Repository {
     private val _meals = MutableLiveData<MealsRepos>()
     val meals: LiveData<MealsRepos> = _meals
 
+    private val _categories = MutableLiveData<CategoriesRepos>()
+    val categories: LiveData<CategoriesRepos> = _categories
+
     fun loadMeals() {
-        val call = requestApiGithubRepos.getRequest("Beef")
+        val call = requestApiGithubRepos.getRequestMeals("Beef")
 
         call.enqueue(object : Callback<MealsRepos> {
             override fun onFailure(call: Call<MealsRepos>, t: Throwable) {}
 
             override fun onResponse(call: Call<MealsRepos>, response: Response<MealsRepos>) {
                 _meals.value = response.body()
+            }
+        })
+    }
+
+    fun loadCategories() {
+        val call = requestApiGithubRepos.getRequestCategories()
+
+        call.enqueue(object : Callback<CategoriesRepos> {
+            override fun onFailure(call: Call<CategoriesRepos>, t: Throwable) {}
+
+            override fun onResponse(call: Call<CategoriesRepos>, response: Response<CategoriesRepos>) {
+                _categories.value = response.body()
             }
         })
     }

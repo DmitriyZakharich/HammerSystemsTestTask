@@ -15,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.example.hammersystemstesttask.MyApp
 import com.example.hammersystemstesttask.R
-import com.example.hammersystemstesttask.ViewPagerPromoAdapter
+import com.example.hammersystemstesttask.domain.ViewPagerPromoAdapter
 import com.example.hammersystemstesttask.databinding.FragmentMenuBinding
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModel
 import com.example.hammersystemstesttask.viewmodel.MenuFragmentViewModelFactory
@@ -43,9 +43,11 @@ class MenuFragment : Fragment() {
 
         configuringViewModel()
         startRecyclerMenuViewModels()
+        startRecycleCategoriesViewModels()
         startViewPagerPromoViewModels()
-
         configuringSpinnerAdapter()
+
+        binding.recyclerviewCategories.setOnClickListener {}
     }
 
     private fun configuringViewModel() {
@@ -58,6 +60,13 @@ class MenuFragment : Fragment() {
             binding.recyclerviewMenu.adapter = it
         }
         viewModel.getRecyclerMenuAdapter()
+    }
+
+    private fun startRecycleCategoriesViewModels() {
+        viewModel.recyclerCategoriesAdapter.observe(viewLifecycleOwner) {
+            binding.recyclerviewCategories.adapter = it
+        }
+        viewModel.getRecyclerCategoriesAdapter()
     }
 
 
@@ -99,6 +108,10 @@ class MenuFragment : Fragment() {
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item)
         binding.citySpinner.adapter = adapter2
     }
+
+//    private fun onItemClick(position: Int) {
+//        Toast.makeText(this, data[position], Toast.LENGTH_SHORT).show()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
